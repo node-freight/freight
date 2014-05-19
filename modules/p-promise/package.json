@@ -1,0 +1,47 @@
+{
+  "name": "p-promise",
+  "version": "0.2.5",
+  "description": "A simple Promises/A+ library.",
+  "author": {
+    "name": "Robert Katić",
+    "email": "robert.katic@gmail.com",
+    "url": "https://github.com/rkatic"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rkatic/p.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rkatic/p/issues"
+  },
+  "main": "p.js",
+  "scripts": {
+    "posttest": "uglifyjs p.js -o p.min.js -m",
+    "test-own": "mocha -R spec -s 100 test/test.js",
+    "test-aplus": "promises-aplus-tests test/adapter",
+    "test": "promises-aplus-tests test/adapter --reporter dot && mocha -s 200 test/test.js"
+  },
+  "keywords": [
+    "promise",
+    "promises",
+    "promises-aplus",
+    "browser",
+    "node"
+  ],
+  "devDependencies": {
+    "mocha": "1.x.x",
+    "expect.js": "0.2.x",
+    "promises-aplus-tests": "~1",
+    "uglify-js": "~2"
+  },
+  "readme": "[![Build Status](https://travis-ci.org/rkatic/p.png?branch=master)](https://travis-ci.org/rkatic/p)\n\n<a href=\"http://promises-aplus.github.com/promises-spec\">\n    <img src=\"http://promises-aplus.github.com/promises-spec/assets/logo-small.png\"\n         alt=\"Promises/A+ logo\" title=\"Promises/A+ 1.0 compliant\" />\n</a>\n\n#P\n\nA simple Promises/A+ library.\n\n- Implements a subset of the the [Q](https://github.com/kriskowal/q) API.\n- Passing the [Promises/A+ Compliance Test Suite](https://github.com/promises-aplus/promises-tests).\n- Cross-Browser, Node.js and RequireJS ready.\n- Small.\n- Simple.\n- [Ultra Fast](http://jsperf.com/wqfwewefewrw/9).\n\n##API\n\nP implements a subset of the [Q](https://github.com/kriskowal/q) API.\n\n- `P(val)`\n- `P.reject(reason)`\n- `P.defer()`\n- `P.all(promises)`\n- `P.allSettled(promises)`\n- `P.onerror`\n- `P.nextTick(callback)`\n- `deferred.promise`\n- `deferred.resolve(value)`\n- `deferred.reject(reason)`\n- `promise.then(onFulfilled, onRejected)`\n- `promise.done(onFulfilled, onRejected)`\n- `promise.spread(onFulfilled, onRejected)`\n- `promise.timeout(ms, opt_timeoutMsg)`\n- `promise.delay(ms)`\n- `promise.inspect()`\n",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/rkatic/p",
+  "_id": "p-promise@0.2.5",
+  "dist": {
+    "shasum": "5ff8057cf50ff358f8cae14613392160678b54ad"
+  },
+  "_from": "p-promise@",
+  "_resolved": "https://registry.npmjs.org/p-promise/-/p-promise-0.2.5.tgz"
+}

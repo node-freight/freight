@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+
+var optlist = {
+  help: {
+    short: 'h',
+    info: 'Display help.',
+    type: Boolean
+  },
+  url: {
+    short: 'u',
+    info: 'Freight Server URL. Example: "http://example.com"',
+    type: require("url")
+  },
+  verbose: {
+    short: 'v',
+    info: 'Verbose mode. A lot more information output.',
+    type: Boolean
+  },
+  create: {
+    short: 'c',
+    info: 'Create a bundle on a remote server. Requires password.',
+    type: Boolean
+  },
+  password: {
+    short: 'p',
+    info: 'Remote Freight Server password to create Freight bundles.',
+    type: String
+  },
+  force: {
+    short: 'f',
+    info: 'A way to force create a bundle. Requires password and create commands.',
+    type: Boolean
+  },
+  silent: {
+    info: 'No output.',
+    type: Boolean
+  }
+};
+
+// Parse `optlist` into a form that nopt can handle.
+var aliases = {};
+var known = {};
+
+Object.keys(optlist).forEach(function (key) {
+  var short = optlist[key].short;
+  if (short) {
+    aliases[short] = '--' + key;
+  }
+  known[key] = optlist[key].type;
+});
+
+// everything is optional.
+// knownOpts and shorthands default to {}
+// arg list defaults to process.argv
+// slice defaults to 2
+var options = require("../modules/nopt/nopt")(known, aliases, process.argv, 2);
+
+delete options.argv;
+
+if (options.help) {
+  Object.keys(optlist).forEach(function(key) {
+    var i = optlist[key];
+    console.log('\n--' + key + '\n', i.short ? '-' + i.short : '', i.info);
+  });
+} else {
+  var freight = require('../freight')();
+  freight.init(options);
+}
+

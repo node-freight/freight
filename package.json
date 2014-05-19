@@ -1,0 +1,7 @@
+{
+  "name": "freight",
+  "version": "0.1.0",
+  "bin": {
+    "freight": "bin/freight"
+  }
+}
