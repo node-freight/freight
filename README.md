@@ -1,32 +1,61 @@
+<p align="center"><img src="http://v14d.com/freight/freight-250.png" height="100" /></p>
 # Freight
-### Experimental Bundling Server for [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/) 
+### Experimental Bundling Server for [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/)
 
 ![](http://v14d.com/freight/demo.gif)
 
-### Demo
+### Try it out
 
-* Install `npm install -g freight` 
-* Find a Freight Server to connect (such as the demo server at freight-demo.vf.io) 
-* Run `freight --server http://freight.vf.io` in a project with `package.json` or `bower.json`.
-* The Freight Server parses and bundles the dependencies for later use.
-* Then anyone can run `freight --server http://freight.vf.io` within the project and get `node_modules` and `bower_components`.
+Install `npm install -g freight`.
 
-See the [CLI README](/docs/readme.md) for detailed CLI options, environment variables and documentation.
+Get the sample project:
 
-See the [Server README](/freight-server/README.md) to help you setup a Freight Server.
+`git clone https://github.com/vladikoff/freight-sample.git && cd freight-sample`
+
+Run `freight -u http://freight.vf.io`, you will now have the NPM and Bower modules!
 
 ### About
 
 __Freight consists of two components: a super tiny command line tool and a hosted cache server.__
 
+![](http://v14d.com/freight/how-it-works.jpg)
+
+See the [Server README](https://github.com/vladikoff/freight-server) to help you setup a Freight Server.
 
 ### Features
 
-* Tiny command line tool with a speedy install. Uses a single [NPM](https://www.npmjs.org/) request.
+* Tiny command line tool with a speedy install. Uses one [NPM](https://www.npmjs.org/) module request.
 * Works with `package.json` and `bower.json` dependencies and devDependencies.
-* **No configuration files required**. However, configuration available via `package.json` or `bower.json`.
+* **No configuration files required**.
 * Works great with continuous integration environments.
-* [Grunt plugin](http://github.com/vladikoff/grunt-freight) to update and create bundles.
+* Dashboard to manage bundle files and bundle queues:
+![](http://v14d.com/freight/freight-server-view.jpg)
+
+### CLI Options
+```
+$ freight --help
+
+--help
+ -h Display help.
+
+--url
+ -u Freight Server URL. Example: "http://example.com"
+
+--verbose
+ -v Verbose mode. A lot more information output.
+
+--create
+ -c Create a bundle on a remote server. Requires password.
+
+--password
+ -p Remote Freight Server password to create Freight bundles.
+
+--force
+ -f A way to force create a bundle. Requires password and create commands.
+
+--silent
+  No output.
+```
 
 ### Author
 

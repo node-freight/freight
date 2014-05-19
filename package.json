@@ -3,5 +3,20 @@
   "version": "0.1.0",
   "bin": {
     "freight": "bin/freight"
+  },
+  "homepage": "https://github.com/vladikoff/freight",
+  "author": {
+    "name": "vladikoff",
+    "email": "vlad.filippov@gmail.com",
+    "url": "http://vf.io"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vladikoff/freight.git"
+  },
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/vladikoff/freight/issues"
   }
 }

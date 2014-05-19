@@ -1,2 +1,5 @@
 test
 docs
+.idea
+*.tgz
+THANKS.md
