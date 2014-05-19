@@ -14,14 +14,6 @@ Get the sample project:
 
 Run `freight -u http://freight.vf.io`, you will now have the NPM and Bower modules!
 
-### About
-
-__Freight consists of two components: a super tiny command line tool and a hosted cache server.__
-
-![](http://v14d.com/freight/how-it-works.jpg)
-
-See the [Server README](https://github.com/vladikoff/freight-server) to help you setup a Freight Server.
-
 ### Features
 
 * Tiny command line tool with a speedy install. Uses one [NPM](https://www.npmjs.org/) module request.
@@ -30,6 +22,43 @@ See the [Server README](https://github.com/vladikoff/freight-server) to help you
 * Works great with continuous integration environments.
 * Dashboard to manage bundle files and bundle queues:
 ![](http://v14d.com/freight/freight-server-view.jpg)
+
+
+### How it works
+
+![](http://v14d.com/freight/how-it-works.jpg)
+
+__Freight consists of two components: a command line tool and a hosted cache server.__ See the [Freight Server README](https://github.com/vladikoff/freight-server) to help you setup a Freight Server. 
+
+#### Create bundles
+Freight Server saves `node_modules` and `bower_components` into compressed `tar.gz` bundles.
+The bundles are created based on your `package.json` and `bower.json`, using the `--create` command. This action requires
+the [server password](https://github.com/vladikoff/freight-server/blob/master/README.md#configure). You can use `--force` to
+recreate the bundle.
+
+Run the command below from a project directory with a `package.json` or `bower.json` file:
+```
+freight -u http://YOUR_SERVER.com --create -p=SERVER_PASSWORD
+************
+
+Bundle does not exist for this project.
+Freight Server will now generate a bundle.
+Monitor your Freight at http://YOUR_SERVER.com/freights/active
+
+************
+```
+
+#### Download bundles 
+You can monitor created and queued bundles using the web interface available at http://YOUR_SERVER.com. The web interface is
+protected with the same Freight [server password](https://github.com/vladikoff/freight-server/blob/master/README.md#configure). 
+
+To download the bundle that was created earlier just use the `freight -u=http://YOUR_SERVER.com` command from the project directory. This will extract `node_modules` and `bower_components` from the bundle.
+```
+$ freight -u http://YOUR_SERVER.com
+Downloading bundle: ||||||||||||||||||| 100% 0.0s 4.2 MB
+Extracting bundle...
+Freight is done in 3.613 seconds.
+```
 
 ### CLI Options
 ```
