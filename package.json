@@ -1,6 +1,6 @@
 {
   "name": "freight",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "bin": {
     "freight": "bin/freight"
   },
@@ -15,8 +15,17 @@
     "type": "git",
     "url": "https://github.com/vladikoff/freight.git"
   },
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
   "dependencies": {},
   "bugs": {
     "url": "https://github.com/vladikoff/freight/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.20.1",
+    "chai": "~1.9.1",
+    "istanbul": "~0.2.10",
+    "rimraf": "~2.2.8"
   }
 }

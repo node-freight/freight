@@ -1,0 +1,10 @@
+{
+  "name": "project2",
+  "version": "0.1.0",
+  "dependencies": {
+    "p": "https://github.com/rkatic/p.git#c6a451ef6080f10f9c31489c127ca3b291d0bc5a",
+    "sinon": "http://sinonjs.org/releases/sinon-1.7.1.js",
+    "blanket": "*"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,9 @@
+{
+  "name": "sample-project",
+  "dependencies": {
+    "inherits": "2"
+  },
+  "devDependencies": {
+    "rimraf": "1.x"
+  }
+}

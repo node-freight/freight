@@ -1,6 +1,8 @@
 <p align="center"><img src="http://v14d.com/freight/freight-250.png" height="100" /></p>
 # Freight
-### Experimental Bundling Server for [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/)
+### Dependency Bundling for [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/)
+
+[![Build Status](https://travis-ci.org/vladikoff/freight.svg?branch=master)](https://travis-ci.org/vladikoff/freight)
 
 ![](http://v14d.com/freight/demo.gif)
 

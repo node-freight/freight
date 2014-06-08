@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "0.10"
+
+services:
+  - redis-server
+
+before_install:
+  - npm install -g npm
+
+before_script:
+  - npm install vladikoff/freight-server#fdd16ec5100b6c15dcc01f30222b19cd70a54e67
+  - cd node_modules/freight-server
+  - NODE_ENV=test npm start &
+  - sleep 5
+  - cd ../..
+
+script:
+  - npm test

@@ -11,14 +11,18 @@ var optlist = {
     info: 'Freight Server URL. Example: "http://example.com"',
     type: require("url")
   },
+  production: {
+    info: 'Download production required bundle only.',
+    type: Boolean
+  },
   verbose: {
     short: 'v',
     info: 'Verbose mode. A lot more information output.',
     type: Boolean
   },
-  create: {
-    short: 'c',
-    info: 'Create a bundle on a remote server. Requires password.',
+  version: {
+    short: 'V',
+    info: 'Display Freight CLI version.',
     type: Boolean
   },
   password: {
@@ -37,6 +41,24 @@ var optlist = {
   }
 };
 
+var actions = {
+  get: {
+    info: 'Default action. Download and extract bundle for the current project directory.',
+    usage: '`freight get -u=http://example.com`'
+  },
+  create: {
+    info: 'Create a bundle for the current project directory on a remote server. Requires password.',
+    usage: '`freight create -u=http://example.com -p=PASSWORD`'
+  },
+  track: {
+    info: 'Track a remote repository for dependency changes. ' +
+          'Freight will automatically create bundles.',
+    usage: '`freight track git@github.com:user/repo.git -u=http://example.com -p=PASSWORD`'
+  }
+};
+
+var availableActions = Object.keys(actions);
+
 // Parse `optlist` into a form that nopt can handle.
 var aliases = {};
 var known = {};
@@ -54,10 +76,27 @@ Object.keys(optlist).forEach(function (key) {
 // arg list defaults to process.argv
 // slice defaults to 2
 var options = require("../modules/nopt/nopt")(known, aliases, process.argv, 2);
-
+var action = options.argv.remain;
 delete options.argv;
 
+// if have an action set, check if it is available
+if (action.length > 0) {
+  if (availableActions.indexOf(action[0]) > -1) {
+    options.action = action[0];
+    options.actionParams = action.slice(1);
+  } else {
+    throw new Error('Invalid Action. Available Actions: ' + availableActions);
+  }
+}
+
 if (options.help) {
+  // display help
+  console.log('Freight Actions:');
+  Object.keys(actions).forEach(function(key) {
+    var i = actions[key];
+    console.log('\n' + key + '\n', i.info, '\n Usage: ' + i.usage);
+  });
+  console.log('\nFreight Flags:');
   Object.keys(optlist).forEach(function(key) {
     var i = optlist[key];
     console.log('\n--' + key + '\n', i.short ? '-' + i.short : '', i.info);

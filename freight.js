@@ -1,10 +1,10 @@
 var fs = require('fs');
 
-
 var log = require('./modules/loglevel');
 
 var remote = require('./lib/remote')(log);
 var manifest = require('./lib/manifest')(log);
+var startup = require('./lib/startup')(log);
 
 
 module.exports = function () {
@@ -12,33 +12,14 @@ module.exports = function () {
   function Freight() {}
 
   Freight.init = function (options) {
-    options = options || {};
     var start = Date.now();
 
-    if (options.verbose) {
-      log.setLevel(log.levels.DEBUG);
-    } else {
-      log.setLevel(log.levels.INFO);
-    }
-
-    if (options.silent) {
-      log.setLevel(log.levels.SILENT);
-      log.disabled = true;
-    }
-
-    if(!options.url) {
-      options.url = require('url').format(process.env.FREIGHT_URL);
-    }
-
-    if (!options.url) {
-      log.error('NOTE: Set server URL with "--url=http://example.com" or FREIGHT_URL=http://example.com');
-      throw new Error('Server URL not set.');
-
-    }
-
+    // set logging
+    startup.log(options);
+    // validate input
+    startup.validate(options);
 
     log.debug('Detecting Environment');
-
     var manifestEnv = manifest.detectEnvironment();
     var url = options.url;
     // the information that is needed to get stuff bundled!
@@ -62,10 +43,11 @@ module.exports = function () {
       bowerrc: {}
     };
 
-    if (options.create) {
+    // if action is to create a bundle
+    if (options.action === 'create') {
       if (!options.password) {
         log.error('To create bundles you need to provide a server password for', options.url);
-        throw new Error('Password not set.');
+        throw new Error('Password not set. It is required to authenticate with the server.');
       }
 
       extra.create = true;
@@ -96,6 +78,10 @@ module.exports = function () {
       project.npm.dependencies = npmData.dependencies;
       project.npm.devDependencies = npmData.devDependencies;
 
+      if (fs.existsSync('npm-shrinkwrap.json')) {
+        project.npmShrinkwrap = manifest.getData('npm-shrinkwrap.json');
+      }
+
       if (npmData.name) {
         // NPM project name is used over Bower, unless we Bower only
         project.name = npmData.name;
@@ -112,7 +98,7 @@ module.exports = function () {
         // freight server response
 
         // if wanted to create, then don't download
-        if (extra.create) {
+        if (options.action === 'create') {
           // report the status
           return remote.freightStatus(freight, url, extra.create);
         }
