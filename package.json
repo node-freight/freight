@@ -4,6 +4,7 @@
   "bin": {
     "freight": "bin/freight"
   },
+  "description": "Dependency Bundling for NPM and Bower",
   "homepage": "https://github.com/vladikoff/freight",
   "author": {
     "name": "vladikoff",
@@ -27,5 +28,20 @@
     "chai": "~1.9.1",
     "istanbul": "~0.2.10",
     "rimraf": "~2.2.8"
-  }
+  },
+  "keywords": [
+    "freight",
+    "registry",
+    "npm",
+    "bundle",
+    "dependency",
+    "offline",
+    "package",
+    "zip",
+    "components",
+    "extract",
+    "modules",
+    "node_modules",
+    "bower"
+  ]
 }

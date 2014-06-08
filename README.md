@@ -2,19 +2,18 @@
 
 <img align="right" src="http://v14d.com/freight/freight-logo.png" height="250" />
 
-> Dependency Bundling for [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/)
+> Dependency Bundles for [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/)
 
-Freight consists of two components - a tiny command line tool and the [Freight Server](https://github.com/vladikoff/freight-server). 
-Freight Server bundles `node_modules` and `bower_components` into compressed `tar.gz` files.
-The command line tool allows you to download and create dependency bundles. 
-Freight helps you to:
+Freight helps you:
+* Bundle all your dependencies into a compressed archive.
 * Avoid committing dependencies into project source.
-* Speed up project installation.
-* Run continues integration steps faster.
+* Speed up project and dependency installation.
+* Speed up continuous integration and deployment.
+* Stop relying on NPM and Bower registries.
 * Avoid dependency installation issues during deployment.
 
-
-![](http://v14d.com/freight/demo.gif)
+Freight consists of two components - a tiny command line tool
+ and a [Freight Server](https://github.com/vladikoff/freight-server) that manages the dependencies.
 
 ### Try it out
 
@@ -26,21 +25,15 @@ Get the sample project:
 
 Run `freight -u http://freight.vf.io`, you will now have the NPM and Bower modules!
 
-### Features
+### Visual Demo
 
-* Tiny command line tool with a speedy install. Uses one [NPM](https://www.npmjs.org/) module request.
-* Works with `package.json` and `bower.json` dependencies and devDependencies.
-* **No configuration files required**.
-* Works great with continuous integration environments.
-* Dashboard to manage bundle files and bundle queues:
-![](http://v14d.com/freight/freight-server-view.jpg)
-
+![](http://v14d.com/freight/demo.gif)
 
 ### How it works
 
 ![](http://v14d.com/freight/how-it-works.jpg)
 
-__Freight consists of two components: a command line tool and a hosted cache server.__ See the [Freight Server README](https://github.com/vladikoff/freight-server) to help you setup a Freight Server. 
+See the [Freight Server README](https://github.com/vladikoff/freight-server) to help you setup a Freight Server. 
 
 #### Create bundles
 Freight Server saves `node_modules` and `bower_components` into compressed `tar.gz` bundles.
@@ -75,6 +68,21 @@ Freight is done in 3.613 seconds.
 ### CLI Options
 ```
 $ freight --help
+Freight Actions:
+
+get
+ Default action. Download and extract bundle for the current project directory. 
+ Usage: `freight -u http://example.com`
+
+create
+ Create a bundle for the current project directory on a remote server. Requires password. 
+ Usage: `freight create -u http://example.com -p PASSWORD`
+
+track
+ Track a remote repository for dependency changes. Freight will automatically create bundles. 
+ Usage: `freight track git@github.com:user/repo.git -u=http://example.com -p=PASSWORD`
+
+Freight Flags:
 
 --help
  -h Display help.
@@ -82,11 +90,14 @@ $ freight --help
 --url
  -u Freight Server URL. Example: "http://example.com"
 
+--production
+  Download production required bundle only.
+
 --verbose
  -v Verbose mode. A lot more information output.
 
---create
- -c Create a bundle on a remote server. Requires password.
+--version
+ -V Display Freight CLI version.
 
 --password
  -p Remote Freight Server password to create Freight bundles.
@@ -96,7 +107,12 @@ $ freight --help
 
 --silent
   No output.
+
 ```
+
+### Server Dashboard
+
+![](http://v14d.com/freight/freight-server-view.jpg)
 
 ### Author
 
