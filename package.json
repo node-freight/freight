@@ -16,7 +16,7 @@
     "url": "https://github.com/vladikoff/freight.git"
   },
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "mocha test/*.js --reporter=spec"
   },
   "dependencies": {},
   "bugs": {

@@ -39,7 +39,6 @@ describe('flow', function () {
     exec(executable + ' create -u http://localhost:8872 -p test',
       function (error, stdout, stderr) {
         assert.equal(stderr, '');
-        console.log(stdout);
 
         var bundleReady = function () {
           exec(executable + ' -u http://localhost:8872',
@@ -61,6 +60,10 @@ describe('flow', function () {
                   assert.notOk(fs.existsSync('app/bower_components/bower.json'), 'bower.json wrong');
                   assert.ok(fs.existsSync('bower.json'), 'keep the original bower.json');
                   assert.ok(fs.existsSync('.bowerrc'), 'keep the original .bowerrc');
+                  // npm shrinkwrap test: inherits must be 2.0.0
+                  var shrinkwrapPkg = JSON.parse(fs.readFileSync('node_modules/inherits/package.json'));
+                  assert.equal(shrinkwrapPkg.version, "2.0.0");
+
                   done();
                 }
               });
