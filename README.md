@@ -1,8 +1,18 @@
-<p align="center"><img src="http://v14d.com/freight/freight-250.png" height="100" /></p>
-# Freight
-### Dependency Bundling for [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/)
+# Freight [![Build Status](https://travis-ci.org/vladikoff/freight.svg?branch=master)](https://travis-ci.org/vladikoff/freight)
 
-[![Build Status](https://travis-ci.org/vladikoff/freight.svg?branch=master)](https://travis-ci.org/vladikoff/freight)
+<img align="right" src="http://v14d.com/freight/freight-logo.png" height="250" />
+
+> Dependency Bundling for [NPM](https://www.npmjs.org/) and [Bower](http://bower.io/)
+
+Freight consists of two components - a tiny command line tool and the [Freight Server](https://github.com/vladikoff/freight-server). 
+Freight Server bundles `node_modules` and `bower_components` into compressed `tar.gz` files.
+The command line tool allows you to download and create dependency bundles. 
+Freight helps you to:
+* Avoid committing dependencies into project source.
+* Speed up project installation.
+* Run continues integration steps faster.
+* Avoid dependency installation issues during deployment.
+
 
 ![](http://v14d.com/freight/demo.gif)
 
