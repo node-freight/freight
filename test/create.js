@@ -43,7 +43,7 @@ describe('create', function () {
   });
 
   it('should create a bundle and a bundle can be extracted', function (done) {
-    this.timeout(15000);
+    this.timeout(30000);
 
     exec(executable + ' create -u http://localhost:8872 -p test',
       function (error, stdout, stderr) {
@@ -54,22 +54,31 @@ describe('create', function () {
           'Freight Server will now generate a bundle.';
         assert.equal(stdout.substring(0, 96), out);
 
-        setTimeout(function () {
+        var bundleReady = function() {
           // extract bundle
           exec(executable + ' -u http://localhost:8872',
             function (error, stdout, stderr) {
               assert.equal(stderr, '');
 
               fs.exists('node_modules/inherits/package.json', function (exists) {
-                assert.ok(exists);
-                assert.ok(fs.existsSync('node_modules/rimraf/package.json'));
-                assert.notOk(fs.existsSync('bower_components'));
-                assert.notOk(fs.existsSync('bower.json'));
-                assert.notOk(fs.existsSync('.bowerrc'));
-                done();
+                if (!exists) {
+                  // didn't get the bunle yet, check again
+                  setTimeout(function () {
+                    bundleReady();
+                  }, 1000);
+                } else {
+                  assert.ok(exists);
+                  assert.ok(fs.existsSync('node_modules/rimraf/package.json'));
+                  assert.notOk(fs.existsSync('bower_components'));
+                  assert.notOk(fs.existsSync('bower.json'));
+                  assert.notOk(fs.existsSync('.bowerrc'));
+                  done();
+                }
               });
             });
-        }, 4000);
+        };
+
+        bundleReady();
 
       });
   });

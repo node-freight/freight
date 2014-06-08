@@ -19,14 +19,16 @@ module.exports = function () {
     // validate input
     startup.validate(options);
 
-    log.debug('Detecting Environment');
     var manifestEnv = manifest.detectEnvironment();
     var url = options.url;
     // the information that is needed to get stuff bundled!
     var extra  = {
       create: false,
       force: false,
-      priority: options['queue-priority'] || 'normal'
+      // Kue priority
+      priority: options['queue-priority'] || 'normal',
+      // request to get a production only bundle
+      production: options.production || false
     };
     var project = {
       name: 'noname',
@@ -69,7 +71,7 @@ module.exports = function () {
       }
       // get .bowerrc data
       if (fs.existsSync('.bowerrc')) {
-        project.bowerrc = manifest.getData('.bowerrc');
+        project.bower.rc = manifest.getData('.bowerrc');
       }
     }
 
@@ -79,7 +81,7 @@ module.exports = function () {
       project.npm.devDependencies = npmData.devDependencies;
 
       if (fs.existsSync('npm-shrinkwrap.json')) {
-        project.npmShrinkwrap = manifest.getData('npm-shrinkwrap.json');
+        project.npm.shrinkwrap = manifest.getData('npm-shrinkwrap.json');
       }
 
       if (npmData.name) {
@@ -106,7 +108,10 @@ module.exports = function () {
         else {
           if (freight.available) {
             // download the Freight Bundle if available
-            return remote.freightDownload(project.name, url, freight.hash)
+            var downloadOpts = {
+              production: extra.production
+            };
+            return remote.freightDownload(project.name, url, freight.hash, downloadOpts)
               .then(
               function (filePath) {
                 return remote.freightExtract(filePath, start)
@@ -123,7 +128,9 @@ module.exports = function () {
 
       })
       .then(
-        function (result) {},
+        function (result) {
+          log.debug('Freight request complete.');
+        },
         function (err) {
           log.error(err);
           throw err;
