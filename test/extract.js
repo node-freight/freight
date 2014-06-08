@@ -4,9 +4,9 @@ var exec = require('child_process').exec;
 var assert = require('chai').assert;
 
 var executable = 'node ' + __dirname + '/../bin/freight';
-var currentDir = process.cwd();
 
-describe('flow', function () {
+describe('extract', function () {
+  var currentDir = process.cwd();
   var projectName = 'sample-project';
 
   beforeEach(function (done) {
@@ -33,7 +33,7 @@ describe('flow', function () {
     process.chdir(currentDir);
   });
 
-  it('should extract a full bundle with bower and npm', function (done) {
+  it('a full bundle with bower and npm', function (done) {
     this.timeout(20000);
 
     exec(executable + ' create -u http://localhost:8872 -p test',
@@ -75,7 +75,7 @@ describe('flow', function () {
       });
   });
 
-  it('should extract a production bundle', function (done) {
+  it('extract a production bundle', function (done) {
     this.timeout(20000);
 
     exec(executable + ' create -u http://localhost:8872 -p test',

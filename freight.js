@@ -112,11 +112,21 @@ module.exports = function () {
               production: extra.production
             };
             return remote.freightDownload(project.name, url, freight.hash, downloadOpts)
-              .then(
-              function (filePath) {
-                return remote.freightExtract(filePath, start)
-              }
-            );
+              .then(function (bundleFile) {
+                  return remote.freightExtract(bundleFile);
+              }).then(function (bundleFile) {
+                  return remote.freightCleanup(bundleFile);
+              }).then(function () {
+                return remote.freightPostExtract();
+              }).then(
+                function () {
+                  return remote.freightDone(start);
+                },
+                function (err) {
+                  log.error(err);
+                  throw err;
+                }
+              );
           } else if (freight.available === false) {
             // otherwise freight is not available
             return remote.freightStatus(freight, url, extra.create);
