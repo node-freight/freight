@@ -1,34 +1,33 @@
 var fs = require('fs');
+var path = require('path');
 
 var log = require('./modules/loglevel');
 
-var remote = require('./lib/remote')(log);
-var manifest = require('./lib/manifest')(log);
 var startup = require('./lib/startup')(log);
-
+var track = require('./lib/track')(log);
 
 module.exports = function () {
 
   function Freight() {}
 
   Freight.init = function (options) {
-    var start = Date.now();
 
     // set logging
     startup.log(options);
     // validate input
     startup.validate(options);
 
-    var manifestEnv = manifest.detectEnvironment();
     var url = options.url;
     // the information that is needed to get stuff bundled!
     var extra  = {
       create: false,
+      track: false,
       force: false,
       // Kue priority
       priority: options['queue-priority'] || 'normal',
       // request to get a production only bundle
-      production: options.production || false
+      production: options.production || false,
+      projectDir: options.directory || '.'
     };
     var project = {
       name: 'noname',
@@ -56,96 +55,25 @@ module.exports = function () {
       extra.password = options.password;
 
       if (options.force) {
-        log.debug('Force creating bundle.');
+        log.debug('Force bundle.');
         extra.force = true;
       }
+
+      return startup.freightRequest(url, project, extra, options);
     }
+    // if action is to hook a git repository
+    else if (options.action === 'track') {
+      if (!options.password) {
+        log.error('To track git repositories you need to provide a server password for', options.url);
+        throw new Error('Password not set. It is required to authenticate with the server.');
+      }
 
-    if (manifestEnv.bower) {
-      var bowerData = manifest.getData('bower.json');
-      project.bower.dependencies = bowerData.dependencies;
-      project.bower.devDependencies = bowerData.devDependencies;
-      project.bower.resolutions = bowerData.resolutions;
-      if (bowerData.name) {
-        project.name = bowerData.name;
-      }
-      // get .bowerrc data
-      if (fs.existsSync('.bowerrc')) {
-        project.bower.rc = manifest.getData('.bowerrc');
-      }
+      extra.track = true;
+      extra.password = options.password;
+      return track.request(url, project, extra, options);
+    } else {
+      return startup.freightRequest(url, project, extra, options);
     }
-
-    if (manifestEnv.npm) {
-      var npmData = manifest.getData('package.json');
-      project.npm.dependencies = npmData.dependencies;
-      project.npm.devDependencies = npmData.devDependencies;
-
-      if (fs.existsSync('npm-shrinkwrap.json')) {
-        project.npm.shrinkwrap = manifest.getData('npm-shrinkwrap.json');
-      }
-
-      if (npmData.name) {
-        // NPM project name is used over Bower, unless we Bower only
-        project.name = npmData.name;
-      }
-    }
-
-    log.debug('Project Configuration:', project);
-    log.debug('Server Configuration:', url);
-
-    // check if this freight is available
-    remote.freightCheck(url, project, extra)
-      .then(
-      function (freight) {
-        // freight server response
-
-        // if wanted to create, then don't download
-        if (options.action === 'create') {
-          // report the status
-          return remote.freightStatus(freight, url, extra.create);
-        }
-        // else just want to download the bundle
-        else {
-          if (freight.available) {
-            // download the Freight Bundle if available
-            var downloadOpts = {
-              production: extra.production
-            };
-            return remote.freightDownload(project.name, url, freight.hash, downloadOpts)
-              .then(function (bundleFile) {
-                  return remote.freightExtract(bundleFile);
-              }).then(function (bundleFile) {
-                  return remote.freightCleanup(bundleFile);
-              }).then(function () {
-                return remote.freightPostExtract();
-              }).then(
-                function () {
-                  return remote.freightDone(start);
-                },
-                function (err) {
-                  log.error(err);
-                  throw err;
-                }
-              );
-          } else if (freight.available === false) {
-            // otherwise freight is not available
-            return remote.freightStatus(freight, url, extra.create);
-          } else {
-            // no response
-            return remote.serverError(url);
-          }
-        }
-
-      })
-      .then(
-        function (result) {
-          log.debug('Freight request complete.');
-        },
-        function (err) {
-          log.error(err);
-          throw err;
-        }
-      );
 
   };
 

@@ -35,6 +35,10 @@ Run `freight -u http://freight.vf.io`, you will now have the NPM and Bower modul
 
 See the [Freight Server README](https://github.com/vladikoff/freight-server) to help you setup a Freight Server. 
 
+Freight by default supports:
+* `npm-shrinkwrap.json`, `.bowerrc`
+* `--production` only bundles
+
 #### Create bundles
 Freight Server saves `node_modules` and `bower_components` into compressed `tar.gz` bundles.
 The bundles are created based on your `package.json` and `bower.json`, using the `--create` command. This action requires
@@ -78,7 +82,7 @@ create
  Create a bundle for the current project directory on a remote server. Requires password. 
  Usage: `freight create -u http://example.com -p PASSWORD`
 
-track
+hook
  Track a remote repository for dependency changes. Freight will automatically create bundles. 
  Usage: `freight track git@github.com:user/repo.git -u=http://example.com -p=PASSWORD`
 

@@ -15,6 +15,10 @@ var optlist = {
     info: 'Download production required bundle only.',
     type: Boolean
   },
+  directory: {
+    info: 'Optional path to project.',
+    type: String
+  },
   verbose: {
     short: 'v',
     info: 'Verbose mode. A lot more information output.',

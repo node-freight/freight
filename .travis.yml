@@ -16,4 +16,4 @@ before_script:
   - cd ../..
 
 script:
-  - npm test
+  - mocha test/*.js --reporter=spec
