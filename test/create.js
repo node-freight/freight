@@ -1,15 +1,17 @@
 var fs = require('fs');
 var rimraf = require('rimraf');
+var spawn = require('child_process').spawn;
 var exec = require('child_process').exec;
 var assert = require('chai').assert;
 
-var executable = 'node ' + __dirname + '/../bin/freight';
+var executable = __dirname + '/../bin/freight';
 var currentDir = process.cwd();
 
 describe('create', function () {
   var projectName = 'sample-project';
 
   beforeEach(function (done) {
+    process.env.FREIGHT_PASSWORD = null;
     // go to the fixture project
     process.chdir(__dirname + '/fixtures/project1');
     // force project update
@@ -31,21 +33,34 @@ describe('create', function () {
     process.chdir(currentDir);
   });
 
-  it('should error and ask for password', function (done) {
+  it('should ask for password, fail on wrong password', function (done) {
     this.timeout(15000);
 
-    exec(executable + ' create -u=http://localhost:8872 ',
-      function (error, stdout, stderr) {
-        assert.equal(stderr.substring(0, 55), 'To create bundles you need to provide a server password');
-        assert.equal(stdout, '');
-        done();
-      });
+    var f = spawn('node', [executable, 'create', '-u=http://localhost:8872']);
+    var stderr = '';
+    var stdout = '';
+
+    f.stdout.on('data', function (data) {
+      f.stdin.write('wrong password\n');
+    });
+
+    f.stderr.on('data', function (data) {
+      stderr += data;
+    });
+
+    f.on('close', function (code) {
+      assert.equal(stderr, 'Wrong Freight Server password.\n');
+      assert.equal(stdout, '');
+      done();
+    });
+
   });
 
   it('should work with a custom directory', function (done) {
     this.timeout(30000);
+    process.env.FREIGHT_PASSWORD = 'test';
     process.chdir(currentDir);
-    var cmd = executable + ' create -u http://localhost:8872 -p test --directory=' + __dirname + '/fixtures/project1';
+    var cmd = executable + ' create -u http://localhost:8872 --directory=' + __dirname + '/fixtures/project1';
 
     exec(cmd,
       function (error, stdout, stderr) {
@@ -90,8 +105,9 @@ describe('create', function () {
 
   it('should create a bundle and a bundle can be extracted', function (done) {
     this.timeout(30000);
+    process.env.FREIGHT_PASSWORD = 'test';
 
-    exec(executable + ' create -u http://localhost:8872 -p test',
+    exec(executable + ' create -u http://localhost:8872',
       function (error, stdout, stderr) {
         assert.equal(stderr, '');
         var out =

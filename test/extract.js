@@ -10,6 +10,7 @@ describe('extract', function () {
   var projectName = 'sample-project';
 
   beforeEach(function (done) {
+    process.env.FREIGHT_PASSWORD = null;
     // go to the fixture project
     process.chdir(__dirname + '/fixtures/project2');
     // force project update
@@ -35,8 +36,9 @@ describe('extract', function () {
 
   it('a full bundle with bower and npm', function (done) {
     this.timeout(20000);
+    process.env.FREIGHT_PASSWORD = 'test';
 
-    exec(executable + ' create -u http://localhost:8872 -p test',
+    exec(executable + ' create -u http://localhost:8872',
       function (error, stdout, stderr) {
         assert.equal(stderr, '');
 
@@ -77,8 +79,9 @@ describe('extract', function () {
 
   it('extract a production bundle', function (done) {
     this.timeout(20000);
+    process.env.FREIGHT_PASSWORD = 'test';
 
-    exec(executable + ' create -u http://localhost:8872 -p test',
+    exec(executable + ' create -u http://localhost:8872',
       function (error, stdout, stderr) {
         assert.equal(stderr, '');
 

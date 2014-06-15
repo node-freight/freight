@@ -29,11 +29,6 @@ var optlist = {
     info: 'Display Freight CLI version.',
     type: Boolean
   },
-  password: {
-    short: 'p',
-    info: 'Remote Freight Server password to create Freight bundles.',
-    type: String
-  },
   force: {
     short: 'f',
     info: 'A way to force create a bundle. Requires password and create commands.',
@@ -52,12 +47,12 @@ var actions = {
   },
   create: {
     info: 'Create a bundle for the current project directory on a remote server. Requires password.',
-    usage: '`freight create -u=http://example.com -p=PASSWORD`'
+    usage: '`freight create -u=http://example.com`'
   },
   track: {
     info: 'Track a remote repository for dependency changes. ' +
           'Freight will automatically create bundles.',
-    usage: '`freight track git@github.com:user/repo.git -u=http://example.com -p=PASSWORD`'
+    usage: '`freight track git@github.com:user/repo.git -u=http://example.com`'
   }
 };
 
