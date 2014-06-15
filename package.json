@@ -1,5 +1,5 @@
 {
-  "name": "sample-project",
+  "name": "freight",
   "version": "0.2.0",
   "bin": {
     "freight": "bin/freight"
