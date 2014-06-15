@@ -12,7 +12,7 @@ before_script:
   - npm install vladikoff/freight-server#29ce236b4a59d4859d9caca6b0c30bdaf493250a
   - cd node_modules/freight-server
   - NODE_ENV=test npm start &
-  - sleep 5
+  - sleep 20
   - cd ../..
 
 script:
