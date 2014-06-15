@@ -9,12 +9,12 @@ before_install:
   - npm install -g npm
 
 before_script:
-  - npm install vladikoff/freight-server#29ce236b4a59d4859d9caca6b0c30bdaf493250a
-
-script:
-  - cd node_modules/freight-server
-  - npm link ..
+  - git clone https://github.com/vladikoff/freight-server.git && cd freight-server
+  - git checkout 29ce236b4a59d4859d9caca6b0c30bdaf493250a
+  - npm install && npm link ../
   - NODE_ENV=test npm start &
   - sleep 20
-  - cd ../..
+  - cd ..
+
+script:
   - mocha test/*.js --reporter=spec
