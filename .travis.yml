@@ -9,7 +9,7 @@ before_install:
   - npm install -g npm
 
 before_script:
-  - npm install vladikoff/freight-server#abb584e0aa86b33b33d3f21680bb2db53e645600
+  - npm install vladikoff/freight-server#29ce236b4a59d4859d9caca6b0c30bdaf493250a
   - cd node_modules/freight-server
   - NODE_ENV=test npm start &
   - sleep 5
