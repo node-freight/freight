@@ -3,15 +3,19 @@ var path = require('path');
 
 var log = require('./modules/loglevel');
 
-var startup = require('./lib/startup')(log);
-var track = require('./lib/track')(log);
-var password = require('./lib/password')(log);
-
 module.exports = function () {
 
   function Freight() {}
 
   Freight.init = function (options) {
+    if (options.log) {
+      log = options.log;
+    }
+
+    var startup = require('./lib/startup')(log);
+    var track = require('./lib/track')(log);
+    var password = require('./lib/password')(log);
+
     // set logging
     startup.log(options);
     // validate input
