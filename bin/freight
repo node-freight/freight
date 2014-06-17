@@ -41,10 +41,6 @@ var optlist = {
 };
 
 var actions = {
-  get: {
-    info: 'Default action. Download and extract bundle for the current project directory.',
-    usage: '`freight get -u=http://example.com`'
-  },
   create: {
     info: 'Create a bundle for the current project directory on a remote server. Requires password.',
     usage: '`freight create -u=http://example.com`'
