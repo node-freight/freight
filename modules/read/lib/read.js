@@ -2,7 +2,7 @@
 module.exports = read
 
 var readline = require('readline')
-var Mute = require('mute-stream')
+var Mute = require('../modules/mute-stream')
 
 function read (opts, cb) {
   if (opts.num) {
