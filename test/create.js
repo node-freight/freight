@@ -36,27 +36,28 @@ describe('create', function () {
   it('should ask for password, fail on wrong password', function (done) {
     this.timeout(15000);
 
-    var f = spawn('node', [executable, 'create', '-u=http://localhost:8872']);
-    var stderr = '';
-    var stdout = '';
+    try {
+      var f = spawn('node', [executable, 'create', '-u=http://localhost:8872']);
+      var stderr = '';
+      var stdout = '';
 
-    f.stdout.on('data', function (data) {
-      f.stdin.write('wrong password\n');
-    });
+      f.stdout.on('data', function (data) {
+        f.stdin.write('wrong password\n');
+      });
 
-    f.stderr.on('data', function (data) {
-      stderr += data;
-    });
+      f.stderr.on('data', function (data) {
+        stderr += data;
+      });
 
-    f.on('error', function (error) {
-      console.log(error);
-    });
 
-    f.on('close', function (code) {
-      assert.equal(stderr, 'Wrong Freight Server password.\n');
-      assert.equal(stdout, '');
-      done();
-    });
+      f.on('close', function (code) {
+        assert.equal(stderr, 'Wrong Freight Server password.\n');
+        assert.equal(stdout, '');
+        done();
+      });
+    } catch (e) {
+      console.log(e);
+    }
 
   });
 
