@@ -48,6 +48,10 @@ describe('create', function () {
       stderr += data;
     });
 
+    f.on('error', function (error) {
+      console.log(error);
+    });
+
     f.on('close', function (code) {
       assert.equal(stderr, 'Wrong Freight Server password.\n');
       assert.equal(stdout, '');
