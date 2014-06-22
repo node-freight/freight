@@ -37,8 +37,7 @@ describe('track', function () {
     exec(cmd,
       function (error, stdout, stderr) {
         assert.notOk(stderr);
-        assert.ok(stdout);
-        console.log(stdout);
+        assert.equal(stdout, 'Tracking successfully setup for: https://github.com/vladikoff/freight-sample.git master\n');
         done();
       });
   });

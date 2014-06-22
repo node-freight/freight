@@ -56,7 +56,9 @@ describe('extract', function () {
                   assert.ok(exists, 'inherits should exist');
                   assert.ok(fs.existsSync('node_modules/rimraf/package.json'), 'rimraf should exist');
                   assert.notOk(fs.existsSync('bower_components'), 'wrong bower dir');
-                  assert.ok(fs.existsSync('app/bower_components/normalize.css/bower.json'), 'normalize should exist');
+                  assert.ok(fs.existsSync('app/bower_components/normalize.css/.bower.json'), 'normalize should exist');
+                  var bowerResolution = JSON.parse(fs.readFileSync('app/bower_components/normalize.css/.bower.json')).version;
+                  assert.equal(bowerResolution, '2.0.1', 'should use bower resolutions');
                   assert.ok(fs.existsSync('app/bower_components/sinon/index.js'), 'sinon should exist');
                   assert.ok(fs.existsSync('app/bower_components/p/p.js'), 'p should exist');
                   assert.notOk(fs.existsSync('app/bower_components/bower.json'), 'bower.json wrong');
@@ -77,7 +79,7 @@ describe('extract', function () {
       });
   });
 
-  it('extract a production bundle', function (done) {
+  it('a production bundle', function (done) {
     this.timeout(20000);
     process.env.FREIGHT_PASSWORD = 'test';
 
@@ -99,7 +101,7 @@ describe('extract', function () {
                   assert.ok(exists, 'npm module inherits should exist');
                   assert.notOk(fs.existsSync('node_modules/rimraf/package.json'), 'rimraf should not exist');
                   assert.notOk(fs.existsSync('bower_components'), 'wrong bower component directory');
-                  assert.ok(fs.existsSync('app/bower_components/normalize.css/bower.json'), 'normalize should exist');
+                  assert.ok(fs.existsSync('app/bower_components/normalize.css/.bower.json'), 'normalize should exist');
                   assert.notOk(fs.existsSync('app/bower_components/sinon/index.js'), 'sinon should not exist in prod');
                   assert.ok(fs.existsSync('app/bower_components/p/p.js'));
                   assert.notOk(fs.existsSync('app/bower_components/bower.json'));

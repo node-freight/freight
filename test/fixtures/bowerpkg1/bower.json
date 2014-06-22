@@ -1,0 +1,7 @@
+{
+  "name": "bowerpkg1",
+  "version": "0.1.0",
+  "dependencies": {
+    "normalize.css": "2.0.1"
+  }
+}
