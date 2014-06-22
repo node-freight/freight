@@ -32,7 +32,7 @@ describe('create', function () {
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
     process.chdir(currentDir);
   });
-
+/*
   it('should ask for password, fail on wrong password', function (done) {
     this.timeout(15000);
 
@@ -49,7 +49,6 @@ describe('create', function () {
         stderr += data;
       });
 
-
       f.on('close', function (code) {
         assert.equal(stderr, 'Wrong Freight Server password.\n');
         assert.equal(stdout, '');
@@ -59,7 +58,7 @@ describe('create', function () {
       console.log(e);
     }
 
-  });
+  });*/
 
   it('should work with a custom directory', function (done) {
     this.timeout(30000);
