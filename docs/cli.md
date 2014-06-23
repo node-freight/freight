@@ -73,10 +73,8 @@ freight create
 
 ### Continuous integration
 
-Setting up Freight on CI environments is not complicated. 
-It works the same way as the [downloading bundles](/cli.html#downloading-bundles) section.
-
-In your `.travis.yml`, run these commands in the `before_install` step:
+Setting up Freight on CI environments is easy and works the same way as downloading bundles. 
+If you want to use Freight with Travis CI, then edit your `.travis.yml`, add these commands in the `before_install` step:
 ```
 - FREIGHT_URL=http://freight-server.example
 - npm install -g vladikoff/freight
@@ -84,6 +82,7 @@ In your `.travis.yml`, run these commands in the `before_install` step:
 ```
 
 If your Freight Server is down or the bundle is missing, then Freight will still exit with status code `0`.
+This way the build won't fail and the CI will fallback to NPM or Bower registries.
 
 ### CLI Options
 
