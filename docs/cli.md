@@ -1,7 +1,7 @@
 # Freight CLI Documentation
 
 The Freight CLI has several commands and most of them interact with a [Freight Server](https://github.com/vladikoff/freight-server).
-You must either [setup a Freight Server]() or use one that already exists. 
+You must either [setup a Freight Server](https://github.com/vladikoff/freight-server/blob/master/README.md#server-quick-setup) or use one that already exists. 
 
 ## Installation
 
