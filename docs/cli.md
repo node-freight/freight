@@ -36,7 +36,8 @@ If the bundle exists on the server and the dependencies match, then Freight will
 
 Using the `freight track` and `freight create` commands you can tell the server to initialize a project bundle.
 These actions require server authentication to avoid unauthorized bundles.
-The Freight password is configured on the server, you can learn more about this password in the [server documentation]().
+The Freight password is configured on the server, you can learn more about this password in 
+ the [server documentation](https://github.com/vladikoff/freight-server/blob/master/README.md).
 
 Use the `FREIGHT_PASSWORD` environment variable to avoid password prompts.
 Set it using:
@@ -59,7 +60,7 @@ freight track https://github.com/vladikoff/freight.git
 Track other branches:
 
 ``` 
-freight track https://github.com/vladikoff/freight.git development
+freight track https://github.com/vladikoff/freight.git -b development
 ```
 
 ### Create Bundles Manually
@@ -67,7 +68,7 @@ freight track https://github.com/vladikoff/freight.git development
 From a project directory with a `package.json` or a `bower.json`.
 
 ``` 
-freight create -u http://freight-server.example
+freight create
 ```
 
 ### Continuous integration
@@ -75,11 +76,14 @@ freight create -u http://freight-server.example
 Setting up Freight on CI environments is not complicated. 
 It works the same way as the [downloading bundles](/cli.html#downloading-bundles) section.
 
-In your `.travis.yml`:
+In your `.travis.yml`, run these commands in the `before_install` step:
 ```
- freight -u http://freight.dev.lcip.org
- 
+- FREIGHT_URL=http://freight-server.example
+- npm install -g vladikoff/freight
+- freight
 ```
+
+If your Freight Server is down or the bundle is missing, then Freight will still exit with status code `0`.
 
 ### CLI Options
 
