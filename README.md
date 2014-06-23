@@ -15,6 +15,10 @@ Freight helps you:
 Freight consists of two components - a tiny command line tool
  and a [Freight Server](https://github.com/vladikoff/freight-server) that manages the dependencies.
 
+__See the [Freight Documentation](docs/cli.md).__
+ 
+__See the [Freight Server README](https://github.com/vladikoff/freight-server) to help you setup a Freight Server.__
+
 ### Try it out
 
 Install `npm install -g freight`.
@@ -25,21 +29,18 @@ Get the sample project:
 
 Run `freight -u http://freight.vf.io`, you will now have the NPM and Bower modules!
 
+
 ### Visual Demo
 
 ![](http://v14d.com/freight/demo.gif)
 
 ### How it works
 
-![](http://v14d.com/freight/how-it-works.jpg)
+![](http://v14d.com/freight/how-it-works.png)
 
-__See the [Freight Documentation](docs/cli.md).__
- 
-__See the [Freight Server README](https://github.com/vladikoff/freight-server) to help you setup a Freight Server.__
-
-Freight by default supports:
-* `npm-shrinkwrap.json`, `.bowerrc`
-* `--production` only bundles
+Freight supports:
+* with NPM: `npm-shrinkwrap.json`, NPM rebuild, production only bundles
+* with Bower: `.bowerrc`, Bower resolutions
 
 ### Author
 
@@ -56,4 +57,4 @@ See the [CHANGELOG](CHANGELOG).
 [npm-image]: http://img.shields.io/npm/v/freight.svg
 
 [travis-url]: https://travis-ci.org/vladikoff/freight
-[travis-image]: http://img.shields.io/travis/vladikoff/freight.svg
+[travis-image]: https://travis-ci.org/vladikoff/freight.svg?branch=master
