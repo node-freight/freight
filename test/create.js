@@ -32,33 +32,17 @@ describe('create', function () {
     fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
     process.chdir(currentDir);
   });
-/*
+
   it('should ask for password, fail on wrong password', function (done) {
     this.timeout(15000);
 
-    try {
-      var f = spawn('node', [executable, 'create', '-u=http://localhost:8872']);
-      var stderr = '';
-      var stdout = '';
-
-      f.stdout.on('data', function (data) {
-        f.stdin.write('wrong password\n');
-      });
-
-      f.stderr.on('data', function (data) {
-        stderr += data;
-      });
-
-      f.on('close', function (code) {
+    exec('FREIGHT_PASSWORD=wrong ' + executable + ' create -u http://localhost:8872',
+      function (error, stdout, stderr) {
         assert.equal(stderr, 'Wrong Freight Server password.\n');
-        assert.equal(stdout, '');
         done();
       });
-    } catch (e) {
-      console.log(e);
-    }
 
-  });*/
+  });
 
   it('should work with a custom directory', function (done) {
     this.timeout(30000);
