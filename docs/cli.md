@@ -87,21 +87,40 @@ All available command line options are listed below:
 
 ```
 $ freight --help
+Freight Actions:
+
+get
+ Default action. Download the bundle for the current project. Setting `get` is optional. 
+ Usage: `freight`
+
+create
+ Create a bundle for the current project directory on a remote server. Requires password. 
+ Usage: `freight create`
+
+track
+ Track a remote repository for dependency changes.
+ Freight will automatically create bundles. `master` branch by default. 
+ Usage: `freight track https://github.com:user/repo.git [-b branch]`
+
+Freight Flags:
 
 --help
  -h Display help.
 
 --url
- -u Freight Server URL. Example: "http://example.com"
+ -u Freight Server URL. Example: "-u=http://example.com"
+
+--production
+  Download production required bundle only.
+
+--directory
+  Optional path to project.
 
 --verbose
  -v Verbose mode. A lot more information output.
 
---create
- -c Create a bundle on a remote server. Requires password.
-
---password
- -p Remote Freight Server password to create Freight bundles.
+--version
+ -V Display Freight CLI version.
 
 --force
  -f A way to force create a bundle. Requires password and create commands.

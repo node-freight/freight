@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+var fs = require('fs');
+var path = require('path');
 
 var optlist = {
   help: {
@@ -8,7 +10,7 @@ var optlist = {
   },
   url: {
     short: 'u',
-    info: 'Freight Server URL. Example: "http://example.com"',
+    info: 'Freight Server URL. Example: "-u=http://example.com"',
     type: require("url")
   },
   production: {
@@ -41,14 +43,18 @@ var optlist = {
 };
 
 var actions = {
+  get: {
+    info: 'Default action. Download the bundle for the current project. Setting `get` is optional.',
+    usage: '`freight`'
+  },
   create: {
     info: 'Create a bundle for the current project directory on a remote server. Requires password.',
-    usage: '`freight create -u=http://example.com`'
+    usage: '`freight create`'
   },
   track: {
-    info: 'Track a remote repository for dependency changes. ' +
-          'Freight will automatically create bundles.',
-    usage: '`freight track git@github.com:user/repo.git -u=http://example.com`'
+    info: 'Track a remote repository for dependency changes.' +
+          '\n Freight will automatically create bundles. `master` branch by default.',
+    usage: '`freight track https://github.com:user/repo.git [-b branch]`'
   }
 };
 
@@ -87,15 +93,17 @@ if (action.length > 0) {
 if (options.help) {
   // display help
   console.log('Freight Actions:');
-  Object.keys(actions).forEach(function(key) {
+  Object.keys(actions).forEach(function (key) {
     var i = actions[key];
     console.log('\n' + key + '\n', i.info, '\n Usage: ' + i.usage);
   });
   console.log('\nFreight Flags:');
-  Object.keys(optlist).forEach(function(key) {
+  Object.keys(optlist).forEach(function (key) {
     var i = optlist[key];
     console.log('\n--' + key + '\n', i.short ? '-' + i.short : '', i.info);
   });
+}else if (options.version) {
+  console.log(JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'))).version);
 } else {
   var freight = require('../freight')();
   freight.init(options);
