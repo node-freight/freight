@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "0.10"
+
+services:
+  - redis-server
+
+before_install:
+  - npm install -g npm
+
+before_script:
+  - git clone https://github.com/vladikoff/freight-server.git && cd freight-server
+  - git checkout dcf0de5e4022ea69d89636d98c620ee9857cf5d8
+  - npm install && npm link ../
+  - NODE_ENV=test LOG_LEVEL=debug npm start &
+  - sleep 30
+  - cd ..
+
+script:
+  - mocha test/*.js --reporter=spec

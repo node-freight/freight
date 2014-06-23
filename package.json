@@ -1,9 +1,10 @@
 {
   "name": "freight",
-  "version": "0.1.2",
+  "version": "0.3.0",
   "bin": {
     "freight": "bin/freight"
   },
+  "description": "Dependency Bundling for NPM and Bower",
   "homepage": "https://github.com/vladikoff/freight",
   "author": {
     "name": "vladikoff",
@@ -15,8 +16,30 @@
     "type": "git",
     "url": "https://github.com/vladikoff/freight.git"
   },
+  "main": "./freight",
   "dependencies": {},
   "bugs": {
     "url": "https://github.com/vladikoff/freight/issues"
-  }
+  },
+  "devDependencies": {
+    "mocha": "~1.20.1",
+    "chai": "~1.9.1",
+    "istanbul": "~0.2.10",
+    "rimraf": "~2.2.8"
+  },
+  "keywords": [
+    "freight",
+    "registry",
+    "npm",
+    "bundle",
+    "dependency",
+    "offline",
+    "package",
+    "zip",
+    "components",
+    "extract",
+    "modules",
+    "node_modules",
+    "bower"
+  ]
 }
