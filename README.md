@@ -36,7 +36,7 @@ Run `freight -u http://freight.vf.io`, you will now have the NPM and Bower modul
 
 ### How it works
 
-![](http://v14d.com/freight/how-it-works.png)
+![](http://v14d.com/freight/how-it-works-outline.png)
 
 Freight supports:
 * with NPM: `npm-shrinkwrap.json`, NPM rebuild, production only bundles
