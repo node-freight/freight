@@ -11,7 +11,6 @@ describe('track', function () {
 
     exec(cmd,
       function (error, stdout, stderr) {
-        //assert.equal(error.toString().substring(0, 48), 'Error: Command failed: To track git repositories');
         assert.equal(stderr, '[Error: 403 Forbidden]\n');
         done();
       });
