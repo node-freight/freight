@@ -1,6 +1,6 @@
+/*global describe, it, beforeEach, afterEach*/
 var fs = require('fs');
 var rimraf = require('rimraf');
-var spawn = require('child_process').spawn;
 var exec = require('child_process').exec;
 var assert = require('chai').assert;
 

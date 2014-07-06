@@ -1,6 +1,3 @@
-var fs = require('fs');
-var path = require('path');
-
 var log = require('./modules/loglevel');
 
 module.exports = function () {
@@ -30,7 +27,7 @@ module.exports = function () {
       // Kue priority
       priority: options['queue-priority'] || 'normal',
       // request to get a production only bundle
-      production: options.production || false,
+      production: startup.detectProduction(options),
       projectDir: options.directory || '.'
     };
     var project = {

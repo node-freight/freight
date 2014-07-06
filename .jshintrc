@@ -1,0 +1,35 @@
+{
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "esnext": true,
+  "globalstrict": false,
+  "immed": true,
+  "indent": 2,
+  "latedef": true,
+  "noarg": true,
+  "node": true,
+  "quotmark": "single",
+  "regexp": true,
+  "newcap": false,
+  "smarttabs": true,
+  "strict": false,
+  "sub": true,
+  "trailing": true,
+  "undef": true,
+  "unused": "vars",
+  "globals": {
+    "define": false
+  },
+  "passfail": false,
+  "maxerr": 100,
+  "forin": false,
+  "white": false,
+  "predef": [
+    "exports",
+    "require",
+    "process"
+  ],
+  "shadow": false,
+  "asi": true
+}

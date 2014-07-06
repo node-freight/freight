@@ -1,3 +1,7 @@
+v0.3.1:
+  date: 2014-07-06
+  changes:
+    - Adds support for NODE_ENV=production
 v0.3.0:
   date: 2014-06-22
   changes:

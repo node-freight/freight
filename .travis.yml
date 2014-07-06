@@ -13,8 +13,9 @@ before_script:
   - git checkout dcf0de5e4022ea69d89636d98c620ee9857cf5d8
   - npm install && npm link ../
   - NODE_ENV=test LOG_LEVEL=debug npm start &
-  - sleep 30
+  - sleep 20
   - cd ..
 
 script:
+  - node_modules/.bin/grunt jshint
   - mocha test/*.js --reporter=spec

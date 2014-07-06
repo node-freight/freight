@@ -11,7 +11,7 @@ var optlist = {
   url: {
     short: 'u',
     info: 'Freight Server URL. Example: "-u=http://example.com"',
-    type: require("url")
+    type: require('url')
   },
   production: {
     info: 'Download production required bundle only.',
@@ -76,7 +76,7 @@ Object.keys(optlist).forEach(function (key) {
 // knownOpts and shorthands default to {}
 // arg list defaults to process.argv
 // slice defaults to 2
-var options = require("../modules/nopt/nopt")(known, aliases, process.argv, 2);
+var options = require('../modules/nopt/nopt')(known, aliases, process.argv, 2);
 var action = options.argv.remain;
 delete options.argv;
 
@@ -108,4 +108,3 @@ if (options.help) {
   var freight = require('../freight')();
   freight.init(options);
 }
-
