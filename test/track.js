@@ -42,4 +42,18 @@ describe('track', function () {
       });
   });
 
+  it('should start tracking a repository with a nested directory and a custom branch ', function (done) {
+    this.timeout(20000);
+    process.env.FREIGHT_PASSWORD = 'test';
+    var cmd = executable + ' track https://github.com/vladikoff/freight-sample.git -u http://localhost:8872 ' +
+      '--track-branch=dev --track-directory=app';
+
+    exec(cmd,
+      function (error, stdout, stderr) {
+        assert.notOk(stderr);
+        assert.equal(stdout, 'Tracking successfully setup for: https://github.com/vladikoff/freight-sample.git dev\n');
+        done();
+      });
+  });
+
 });
