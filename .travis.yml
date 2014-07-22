@@ -10,7 +10,7 @@ before_install:
 
 before_script:
   - git clone https://github.com/vladikoff/freight-server.git && cd freight-server
-  - git checkout 55d1e16d960b065d37f83aec6bc673dd88cc7593
+  - git checkout 0a115cc210862ff331574a92f93f2220972a802c
   - npm install && npm link ../
   - NODE_ENV=test LOG_LEVEL=debug npm start &
   - sleep 20
