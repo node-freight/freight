@@ -60,7 +60,13 @@ freight track https://github.com/vladikoff/freight.git
 Track other branches:
 
 ``` 
-freight track https://github.com/vladikoff/freight.git -b development
+freight track https://github.com/vladikoff/freight.git --track-branch=development
+```
+
+Set a custom directory of your project that has your `package.json` and `bower.json`:
+
+``` 
+freight track https://github.com/vladikoff/freight.git --track-directory=static
 ```
 
 ### Create Bundles Manually
@@ -102,8 +108,8 @@ create
 
 track
  Track a remote repository for dependency changes.
- Freight will automatically create bundles. `master` branch by default. 
- Usage: `freight track https://github.com:user/repo.git [-b branch]`
+ Freight will automatically create bundles. `master` branch by default. Looks up root directory by default.
+ Usage: `freight track https://github.com:user/repo.git [--track-branch=branch_name] [--track-directory=directory_name]`
 
 Freight Flags:
 

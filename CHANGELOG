@@ -1,3 +1,9 @@
+v0.4.0:
+  date: 2014-07-22
+  changes:
+    - 'freight track REPO BRANCH_NAME' is now 'freight track REPO --track-branch=BRANCH_NAME'.
+    - Added 'freight track [--track-directory=PATH_TO_PACKAGE_JSON_FILES], allows to track repositories
+    that have 'package.json' and 'bower.json' in subdirectories.
 v0.3.1:
   date: 2014-07-06
   changes:
