@@ -78,7 +78,7 @@ module.exports = function () {
           function (err) {
             log.error(err);
             if (!options.server) {
-              process.exit(0);
+              process.exit(1);
             }
           }
         );
