@@ -17,5 +17,5 @@ before_script:
   - cd ..
 
 script:
-  - node_modules/.bin/grunt jshint
+  - node_modules/.bin/grunt lint
   - mocha test/*.js --reporter=spec

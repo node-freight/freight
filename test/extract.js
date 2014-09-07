@@ -49,7 +49,7 @@ describe('extract', function () {
               assert.equal(stderr, '');
 
               fs.exists('node_modules/inherits/package.json', function (exists) {
-                if (!exists) {
+                if (! exists) {
                   setTimeout(function () {
                     bundleReady();
                   }, 2000);
@@ -94,7 +94,7 @@ describe('extract', function () {
               assert.equal(stderr, '');
 
               fs.exists('node_modules/inherits/package.json', function (exists) {
-                if (!exists) {
+                if (! exists) {
                   setTimeout(function () {
                     bundleReady();
                   }, 2000);
@@ -133,7 +133,7 @@ describe('extract', function () {
               assert.equal(stderr, '');
 
               fs.exists('node_modules/inherits/package.json', function (exists) {
-                if (!exists) {
+                if (! exists) {
                   setTimeout(function () {
                     bundleReady();
                   }, 2000);
@@ -174,7 +174,7 @@ describe('extract', function () {
               assert.equal(stderr, '');
 
               fs.exists('node_modules/inherits/package.json', function (exists) {
-                if (!exists) {
+                if (! exists) {
                   setTimeout(function () {
                     bundleReady();
                   }, 2000);

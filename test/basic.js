@@ -22,7 +22,7 @@ describe('cli', function () {
         assert.equal(stderr, '');
         assert.ok(stdout);
         done();
-    });
+      });
   });
 
   it('should not error with FREIGHT_URL set', function (done) {

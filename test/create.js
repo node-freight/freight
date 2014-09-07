@@ -67,7 +67,7 @@ describe('create', function () {
               assert.equal(stderr, '');
 
               fs.exists('node_modules/inherits/package.json', function (exists) {
-                if (!exists) {
+                if (! exists) {
                   // didn't get the bunle yet, check again
                   setTimeout(function () {
                     bundleReady();
@@ -111,7 +111,7 @@ describe('create', function () {
               assert.equal(stderr, '');
 
               fs.exists('node_modules/inherits/package.json', function (exists) {
-                if (!exists) {
+                if (! exists) {
                   // didn't get the bunle yet, check again
                   setTimeout(function () {
                     bundleReady();

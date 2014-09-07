@@ -58,9 +58,8 @@ module.exports = function () {
         extra.password = password;
         return startup.freightRequest(url, project, extra, options);
       });
-    }
-    // if action is to hook a git repository
-    else if (options.action === 'track') {
+    } else if (options.action === 'track') {
+      // if action is to hook a git repository
       extra.track = true;
 
       return password()
@@ -71,13 +70,13 @@ module.exports = function () {
         .then(
           function (result) {
             log.debug('Freight request complete.');
-            if (!options.server) {
+            if (! options.server) {
               process.exit(0);
             }
           },
           function (err) {
             log.error(err);
-            if (!options.server) {
+            if (! options.server) {
               process.exit(1);
             }
           }
