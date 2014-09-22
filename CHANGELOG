@@ -1,3 +1,7 @@
+v0.5.1:
+  date: 2014-09-21
+  changes:
+    - Added more tests
 v0.5.0:
   date: 2014-08-22
   changes:
