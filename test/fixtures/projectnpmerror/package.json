@@ -1,0 +1,6 @@
+{
+  "name": "sample-npm-error-project",
+  "dependencies": {
+    "rimraf": "9999.0.0.0"
+  }
+}
