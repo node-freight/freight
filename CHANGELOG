@@ -1,3 +1,8 @@
+v0.5.2:
+  date: 2015-04-13
+  changes:
+    - Improved HTTP error handling
+    - Test improvements
 v0.5.1:
   date: 2014-09-21
   changes:

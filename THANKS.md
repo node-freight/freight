@@ -3,3 +3,4 @@
 - Adam Rotman (https://github.com/adro21)
 - Gianni Chiappetta (https://github.com/gf3)
 - James Reggio (https://github.com/jamesreggio)
+- Alex Sexton (https://alexsexton.com/)
