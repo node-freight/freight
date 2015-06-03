@@ -56,5 +56,5 @@ See the [CHANGELOG](CHANGELOG).
 [npm-url]: https://npmjs.org/package/freight
 [npm-image]: http://img.shields.io/npm/v/freight.svg
 
-[travis-url]: https://travis-ci.org/vladikoff/freight
-[travis-image]: https://travis-ci.org/vladikoff/freight.svg?branch=master
+[travis-url]: https://travis-ci.org/node-freight/freight
+[travis-image]: https://travis-ci.org/node-freight/freight.svg?branch=master
