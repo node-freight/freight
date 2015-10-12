@@ -1,8 +1,11 @@
 {
   "name": "freight",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "bin": {
     "freight": "bin/freight"
+  },
+  "scripts": {
+    "test": "mocha test/*.js --reporter=spec"
   },
   "description": "Dependency Bundling for NPM and Bower",
   "homepage": "https://github.com/vladikoff/freight",
