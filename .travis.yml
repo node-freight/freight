@@ -14,13 +14,14 @@ env:
 # before_install:
 #   - npm install -g npm
 
-# before_script:
-#   - git clone https://github.com/vladikoff/freight-server.git && cd freight-server
-#   - git checkout 7382b64dc093387cb3fe2b1fc440bf1b0d7ab41b
-#   - npm install && npm link ../
-#   - NODE_ENV=test LOG_LEVEL=debug npm start &
-#   - sleep 20
-#   - cd ..
+before_script:
+  - git clone https://github.com/vladikoff/freight-server.git && cd freight-server
+  - git checkout 7382b64dc093387cb3fe2b1fc440bf1b0d7ab41b
+  - npm install && npm link ../
+  - NODE_ENV=test LOG_LEVEL=debug npm start &
+  - sleep 20
+  - cd ..
 
 script:
   - node_modules/.bin/grunt lint
+  - npm test
