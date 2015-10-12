@@ -5,7 +5,7 @@
     "freight": "bin/freight"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha test/*.js --reporter=spec"
+    "test": "mocha test/*.js --reporter=spec"
   },
   "description": "Dependency Bundling for NPM and Bower",
   "homepage": "https://github.com/vladikoff/freight",
