@@ -1,3 +1,8 @@
+v0.6.0:
+  date: 2016-07-21
+  changes:
+    - Improved Windows support
+    - Improved node 4 support
 v0.5.2:
   date: 2015-04-13
   changes:
